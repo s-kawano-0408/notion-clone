@@ -8,9 +8,11 @@ import { FiPlus } from "react-icons/fi";
 import "../styles/pages/home.css";
 import { useState } from "react";
 import { noteRepository } from "../modules/notes/note.repository";
+import { useNoteStore } from "../modules/notes/note.state";
 export default function Home() {
   const [title, setTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const noteStore = useNoteStore();
 
   const createNote = async () => {
     setIsSubmitting(true);
@@ -19,6 +21,7 @@ export default function Home() {
         title: title,
         parentId: undefined,
       });
+      noteStore.set([newNote]);
       setTitle("");
       console.log(newNote);
     } catch (error) {
