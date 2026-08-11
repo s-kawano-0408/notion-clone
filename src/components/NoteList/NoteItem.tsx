@@ -21,13 +21,21 @@ interface Props {
   note: Note;
   onCreate?: (event: React.MouseEvent) => void;
   onExpand?: (event: React.MouseEvent) => void;
+  layer?: number;
+  expanded?: boolean;
 }
 
-export default function NoteItem({ note, onCreate, onExpand }: Props) {
+export default function NoteItem({
+  note,
+  onCreate,
+  onExpand,
+  layer = 0,
+  expanded = false,
+}: Props) {
   const [isHovered, setIsHovered] = useState(false);
 
   const getIcon = (): IconType => {
-    return isHovered ? FiChevronDown : FiFile;
+    return expanded ? FiChevronRight : isHovered ? FiChevronDown : FiFile;
   };
   const menu = (
     <div className="note-item-menu-container">
@@ -58,7 +66,7 @@ export default function NoteItem({ note, onCreate, onExpand }: Props) {
   return (
     <div
       role="button"
-      style={{ paddingLeft: "12px" }}
+      style={{ paddingLeft: `${layer * 12 + 12}px` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
