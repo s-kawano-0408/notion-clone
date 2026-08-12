@@ -23,6 +23,7 @@ interface Props {
   onExpand?: (event: React.MouseEvent) => void;
   layer?: number;
   expanded?: boolean;
+  onClick: () => void;
 }
 
 export default function NoteItem({
@@ -31,6 +32,7 @@ export default function NoteItem({
   onExpand,
   layer = 0,
   expanded = false,
+  onClick,
 }: Props) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -69,6 +71,7 @@ export default function NoteItem({
       style={{ paddingLeft: `${layer * 12 + 12}px` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       <Item
         label={note.title ?? "無題"}

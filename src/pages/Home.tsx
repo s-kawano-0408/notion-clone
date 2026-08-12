@@ -9,10 +9,12 @@ import "../styles/pages/home.css";
 import { useState } from "react";
 import { noteRepository } from "../modules/notes/note.repository";
 import { useNoteStore } from "../modules/notes/note.state";
+import { useNavigate } from "react-router-dom";
 export default function Home() {
   const [title, setTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const noteStore = useNoteStore();
+  const navigate = useNavigate();
 
   const createNote = async () => {
     setIsSubmitting(true);
@@ -23,7 +25,7 @@ export default function Home() {
       });
       noteStore.set([newNote]);
       setTitle("");
-      console.log(newNote);
+      navigate(`/notes/${newNote.id}`);
     } catch (error) {
       console.error(error);
       alert("ノートが作成できませんでした");

@@ -6,6 +6,7 @@ const notesAtom = atom<Note[]>([]);
 export const useNoteStore = () => {
   const [notes, setNotes] = useAtom(notesAtom);
   const getAll = () => notes;
+  const getOne = (id: number) => notes.find((note) => note.id === id);
   const set = (newNotes: Note[]) => {
     setNotes((oldNotes) => {
       const combineNotes = [...oldNotes, ...newNotes];
@@ -17,5 +18,5 @@ export const useNoteStore = () => {
       return Object.values(uniqueNotes);
     });
   };
-  return { getAll, set };
+  return { getAll, getOne, set };
 };
