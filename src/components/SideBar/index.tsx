@@ -6,7 +6,11 @@ import { useNoteStore } from "../../modules/notes/note.state";
 import { noteRepository } from "../../modules/notes/note.repository";
 import { useNavigate } from "react-router-dom";
 
-export default function SideBar() {
+type Props = {
+  onSearchButtonClick: () => void;
+};
+
+export default function SideBar({ onSearchButtonClick }: Props) {
   const noteStore = useNoteStore();
   const navigate = useNavigate();
 
@@ -26,7 +30,7 @@ export default function SideBar() {
         <div>
           <div>
             <UserItem />
-            <Item label="検索" icon={FiSearch} onClick={() => {}} />
+            <Item label="検索" icon={FiSearch} onClick={onSearchButtonClick} />
           </div>
           <div className="sidebar-spacer">
             <NoteList />
